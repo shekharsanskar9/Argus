@@ -103,3 +103,7 @@ To run outside Colab, install the packages in `requirements.txt` and change the
 ## Notes
 
 Do not commit `kaggle.json`, trained weights or generated output folders.
+
+## Author
+
+Sanskar Shekhar ([@shekharsanskar9](https://github.com/shekharsanskar9))
