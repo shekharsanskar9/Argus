@@ -40,6 +40,13 @@ from Kaggle. It has four classes:
    such as HONDA and YAMAHA penalised. The notebook also tries a regex score
    for the Indian plate format.
 8. **Export.** Write the best reading per plate to `/content/final_ocr_results.csv`.
+9. **End to end.** `analyse_image` finds each rider without a helmet, matches it
+   to its number plate (the plate inside the rider's box, else the nearest one)
+   and reads the plate. Annotated images go to `/content/violations/` and the
+   readings to `/content/violations.csv`.
+10. **Video.** `process_video` does the same per frame. It uses YOLO tracking so
+    each violating rider is counted once, and keeps the best plate reading seen
+    for that rider.
 
 PaddleOCR is included as a comparison against EasyOCR.
 
@@ -76,6 +83,9 @@ Violation detection at confidence 0.35 found 9 of the 11 true violations, with
 | `/content/plate_crops/`               | Single-plate OCR experiments      |
 | `/content/plate_results/`             | Plate crops from all val images   |
 | `/content/final_ocr_results.csv`      | Final plate readings              |
+| `/content/violations/`                | Annotated violation images        |
+| `/content/violations.csv`             | Violations with their plates      |
+| `/content/traffic_annotated.mp4`      | Annotated video (video cell)      |
 
 ## Limitations and next steps
 
@@ -84,8 +94,8 @@ Violation detection at confidence 0.35 found 9 of the 11 true violations, with
   are a dedicated plate-recognition model or a larger crop resolution.
 - Train `yolov8s.pt` or `yolov8m.pt` for longer to improve helmet
   classification.
-- For video, run detection per frame with OpenCV and track riders across frames
-  so each violation is counted once.
+- The video cell has not been tuned. Test it on real footage and check the
+  tracker keeps rider IDs stable when riders overlap.
 
 ## Notes
 
