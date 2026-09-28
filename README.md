@@ -74,6 +74,9 @@ Violation detection at confidence 0.35 found 9 of the 11 true violations, with
    download the dataset.
 4. Run the cells from top to bottom.
 
+To run outside Colab, install the packages in `requirements.txt` and change the
+`/content/...` paths in the notebook to local ones.
+
 ## Outputs
 
 | Path                                  | Contents                          |
