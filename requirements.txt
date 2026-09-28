@@ -1,0 +1,10 @@
+ultralytics
+kagglehub
+easyocr
+pyyaml
+opencv-python
+pandas
+matplotlib
+# optional, only for the PaddleOCR comparison
+paddleocr
+paddlepaddle
