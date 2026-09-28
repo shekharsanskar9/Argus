@@ -1,0 +1,9 @@
+kaggle.json
+*.pt
+runs/
+dataset/
+plate_crops/
+plate_results/
+*.zip
+.ipynb_checkpoints/
+.DS_Store
