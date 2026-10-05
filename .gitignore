@@ -7,3 +7,8 @@ plate_results/
 *.zip
 .ipynb_checkpoints/
 .DS_Store
+
+# videos (test inputs / annotated outputs)
+*.mp4
+*.mov
+*.avi
