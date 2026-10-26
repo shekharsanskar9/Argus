@@ -1,9 +1,21 @@
+
+# credentials / API keys (use Colab Secrets instead)
 kaggle.json
+*.kaggle
+.env
+
+# model weights
 *.pt
+
+# datasets & generated outputs
 runs/
 dataset/
+seatbelt_dataset/
 plate_crops/
 plate_results/
+plate_evidence/
+violations/
+*.csv
 *.zip
 .ipynb_checkpoints/
 .DS_Store
