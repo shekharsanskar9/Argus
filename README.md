@@ -17,11 +17,6 @@ docs/
   Argus_Presentation.pptx            # slide deck
 samples/
   README.md                          # links to demo clips / trained weights (kept out of git)
-app/
-  main.py                            # FastAPI server, streams pipeline progress to the UI
-  pipeline.py                        # inference pipeline ported from the notebook
-  static/                            # front-end (plain HTML/CSS/JS, no build step)
-Dockerfile, render.yaml              # container + Render Blueprint
 ```
 
 Runtime artefacts (`dataset/`, `runs/`, `plate_results/`, `violations/`, `*.pt`, videos) are
@@ -136,34 +131,6 @@ clean, so these numbers are indicative, not production-grade.
 
 To run outside Colab, install the packages in `requirements.txt`, export the same
 keys as environment variables, and change the `/content/...` paths to local ones.
-
-## Web app
-
-`app/` is a small web front-end for demos. Upload a photo or a clip and it shows each major
-stage of the pipeline as it runs, with the intermediate images and tables:
-
-- **Image:** load → detect objects → flag helmet violations → match & crop plates →
-  OCR (5 pre-processing variants, ranked) → Indian plate-format validation → seat-belt check → report.
-- **Video:** load → detect & track riders (live preview) → N-of-M confirmation →
-  character voting across frames → format validation → seat-belt check → render H.264 → report.
-
-The **Presentation pace** toggle holds each finished stage on screen for a moment so an audience
-can follow. Videos are capped (first 30 s, about 8 sampled frames per second) because Render runs
-on CPU; change this with the `ARGUS_MAX_SECONDS` and `ARGUS_PROCESS_FPS` env vars.
-
-### Deploy on Render
-
-1. Upload `helmet_plate_yolov8_best.pt` (and optionally `seatbelt_best.pt`) to Google Drive and
-   set sharing to **Anyone with the link**. Weights stay out of git.
-2. Push this repo to GitHub, then in Render choose **New > Blueprint** and pick the repo.
-   `render.yaml` creates a Docker web service.
-3. When asked, set `HELMET_MODEL_URL` (and `SEATBELT_MODEL_URL`) to the Drive share links.
-   The app downloads the weights at startup.
-
-The first build takes about 10 minutes. The service needs the **Standard** plan (2 GB): PyTorch +
-EasyOCR use about 1.1 GB idle and 1.7 GB while reading plates, so the 512 MB Free and Starter
-instances run out of memory. If the weights fail to download, the header pill in the UI shows the
-error.
 
 ## Outputs
 
