@@ -24,3 +24,6 @@ violations/
 *.mp4
 *.mov
 *.avi
+
+# python bytecode
+__pycache__/

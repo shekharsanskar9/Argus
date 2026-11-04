@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Argus Traffic Analyser</title>
+  <meta name="description" content="Helmet and seat-belt violation detection with number-plate OCR, shown step by step.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2338bdf8' d='M12 5C6 5 2 12 2 12s4 7 10 7 10-7 10-7-4-7-10-7zm0 11a4 4 0 110-8 4 4 0 010 8z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6 5 2 12 2 12s4 7 10 7 10-7 10-7-4-7-10-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/></svg>
+      <div>
+        <h1>Argus</h1>
+        <p>Helmet &amp; seat-belt violation detection with number-plate OCR</p>
+      </div>
+    </div>
+    <div class="status" id="status"><span class="dot"></span><span id="status-text">Connecting...</span></div>
+  </header>
+
+  <main>
+    <section class="panel upload" id="upload">
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept="image/*,video/*" hidden>
+        <div class="drop-empty" id="drop-empty">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <strong>Drop a traffic photo or clip</strong>
+          <span>or click to browse &middot; JPG, PNG, MP4, MOV</span>
+        </div>
+        <div class="drop-preview" id="drop-preview" hidden></div>
+      </label>
+      <div class="controls">
+        <div class="file-meta" id="file-meta">No file selected</div>
+        <label class="toggle" title="Hold each finished step on screen briefly so an audience can follow">
+          <input type="checkbox" id="pace" checked>
+          <span class="track"><span class="knob"></span></span>
+          Presentation pace
+        </label>
+        <button class="run" id="run" disabled>Analyse</button>
+      </div>
+      <p class="hint" id="limits"></p>
+    </section>
+
+    <div class="notice" id="notice" hidden></div>
+
+    <section class="pipeline" id="pipeline" hidden>
+      <aside class="rail">
+        <h2>Pipeline</h2>
+        <ol id="rail"></ol>
+        <div class="overall"><div class="bar"><i id="overall-bar"></i></div><span id="overall-text"></span></div>
+      </aside>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="panel report" id="report" hidden>
+      <div class="report-head">
+        <h2>Result</h2>
+        <div class="downloads" id="downloads"></div>
+      </div>
+      <div class="media" id="report-media"></div>
+      <div class="table-wrap"><table id="report-table"></table></div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" hidden><img alt=""></div>
+  <script src="app.js"></script>
+</body>
+</html>
